@@ -1,0 +1,24 @@
+### POST request
+POST http://localhost:3001/v1/invoice
+Content-Type: application/json
+X-API-Key: rahasiabanget
+
+{
+    "id": "{{$guid}}",
+    "invoice_number": "INV-2026-0002",
+    "currency": "IDR",
+    "amount": 500000,
+    "status": "PENDING",
+    "issued_at": "2026-05-01T08:00:00Z",
+    "expired_at": "2026-05-08T08:00:00Z",
+    "customer": {
+      "id": "cust_456", "name": "Siti Rahayu", "email": "siti@mail.com",
+      "phone": "08987654321", "address": "Bandung, Jawa Barat"
+    },
+    "items": [
+      { "sku": "SRV-1", "name": "Jasa Konsultasi", "qty": 1, "price": 500000, "total": 500000 }
+    ],
+    "summary": { "subtotal": 500000, "tax": 0, "discount": 0, "grand_total": 500000 },
+    "metadata": { "notes": "Pembayaran dalam 7 hari kerja" },
+    "config": { "template": "invoice_2", "orientation": "potrait" }
+  }
