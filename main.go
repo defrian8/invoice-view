@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"invoice-view/database"
 	"invoice-view/repository"
 	"invoice-view/router"
@@ -23,7 +24,12 @@ func main() {
 
 	_ = godotenv.Load()
 
-	db := database.NewSQLite("file:sqlite/invoice.db?cache=shared&_journal_mode=WAL")
+	dbHost := os.Getenv("DB_HOST")
+	if dbHost == "" {
+		panic("DB_HOST is required")
+	}
+
+	db := database.NewSQLite(fmt.Sprintf("file:%s?cache=shared&_journal_mode=WAL", dbHost))
 	defer db.Close()
 
 	invoiceRepo := repository.NewInvoiceRepository(db)
